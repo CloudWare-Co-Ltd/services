@@ -12,6 +12,7 @@
     "hbs": "~4.0.4",
     "http-errors": "~1.6.3",
     "image-to-base64": "^2.1.0",
+    "moment": "^2.27.0",
     "morgan": "~1.9.1",
     "pdfmake": "^0.1.66"
   }

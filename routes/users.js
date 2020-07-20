@@ -3,8 +3,10 @@ const path = require('path');
 const router = express.Router();
 const PdfPrinter = require('pdfmake');
 const imageToBase64 = require('image-to-base64');
+const moment = require('moment');
+require('moment/locale/km');
 /* GET users listing. */
-router.post('/', async (req, res, next) => {
+router.get('/', async (req, res, next) => {
     let baseImage = await imageToBase64('https://eczasopisma.p.lodz.pl/public/journals/3/pageHeaderLogoImage_en_US.png');
     const fonts = {
         Roboto: {
@@ -44,25 +46,29 @@ router.post('/', async (req, res, next) => {
         },
         content: [
             {
-                image: 'data:image/jpeg;base64,'+baseImage,
+                image: 'data:image/jpeg;base64,' + baseImage,
                 width: 250,
                 alignment: 'center'
             },
             {
                 text: 'ភូមិក្បាលស្ពាន២ សង្កាត់ប៉ោយប៉ែត ក្រុងប៉ោយប៉ែត',
                 alignment: "center",
-                style: ['default']
+                fontSize: 10,
+                style: ['default'],
+                margin: [0, 2]
             },
             {
                 text: [
                     {
                         text: 'ទូរស័ព្ទលេខ៖ ',
                         alignment: "center",
-                        style: ['default']
+                        style: ['default'],
+                        fontSize: 10,
                     },
                     {
                         text: '085 598 999/ 081 598 999',
-                        style: ['roboto']
+                        style: ['roboto'],
+                        fontSize: 10,
                     },
                 ],
             },
@@ -82,17 +88,29 @@ router.post('/', async (req, res, next) => {
                 ],
             },
             {
+                canvas: [{
+                    type: 'line',
+                    x1: 0,
+                    y1: 5,
+                    x2: 262,
+                    y2: 5,
+                    lineWidth: 0.1
+                }],
+                alignment: 'center',
+                margin: [0,2.5]
+            },
+            {
                 table: {
                     headerRows: 1,
                     widths: ['*', 'auto'],
                     body: [
                         [{
                             text: 'ពិពណ៌នា',
-                            alignment: 'center',
+                            // alignment: 'center',
                             bold: true
                         }, {
                             text: 'សាច់ប្រាក់',
-                            alignment: 'center',
+                            alignment: 'right',
                             bold: true
                         }],
                         ['- ចំនួនលុយប្តូរ', {
@@ -164,10 +182,10 @@ router.post('/', async (req, res, next) => {
                 },
                 layout: {
                     hLineWidth: function (i, node) {
-                        return 0.1;
+                        return 0;
                     },
                     vLineWidth: function (i, node) {
-                        return 0.1;
+                        return 0;
                     }
                 }
             },
@@ -187,12 +205,24 @@ router.post('/', async (req, res, next) => {
                         bold: true
                     },
                     {
-                        text: '085 598 999/ 081 598 999',
-                        fontSize: 13,
+                        text: moment().format('D MMMM YYYY, h:mm A'),
+                        fontSize: 12,
                         bold: true,
-                        style: ['roboto']
+                        style: ['default']
                     },
                 ],
+            },
+            {
+                canvas: [{
+                    type: 'line',
+                    x1: 0,
+                    y1: 5,
+                    x2: 250,
+                    y2: 5,
+                    lineWidth: 0.1
+                }],
+                alignment: 'center',
+                margin: [0,5]
             },
             {
                 text: [
