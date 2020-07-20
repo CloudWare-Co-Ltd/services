@@ -4,7 +4,7 @@ const router = express.Router();
 const PdfPrinter = require('pdfmake');
 const imageToBase64 = require('image-to-base64');
 /* GET users listing. */
-router.get('/', async (req, res, next) => {
+router.post('/', async (req, res, next) => {
     let baseImage = await imageToBase64('https://eczasopisma.p.lodz.pl/public/journals/3/pageHeaderLogoImage_en_US.png');
     const fonts = {
         Roboto: {
@@ -43,11 +43,11 @@ router.get('/', async (req, res, next) => {
             }
         },
         content: [
-            /*{
+            {
                 image: 'data:image/jpeg;base64,'+baseImage,
                 width: 250,
                 alignment: 'center'
-            },*/
+            },
             {
                 text: 'ភូមិក្បាលស្ពាន២ សង្កាត់ប៉ោយប៉ែត ក្រុងប៉ោយប៉ែត',
                 alignment: "center",
