@@ -205,7 +205,7 @@ router.get('/', async (req, res, next) => {
                         bold: true
                     },
                     {
-                        text: moment().format('D MMMM YYYY, h:mm A'),
+                        text: moment().utcOffset('GMT+7').format('D MMMM YYYY, h:mm A'),
                         fontSize: 12,
                         bold: true,
                         style: ['default']
