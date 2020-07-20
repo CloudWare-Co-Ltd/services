@@ -43,11 +43,11 @@ router.get('/', async (req, res, next) => {
             }
         },
         content: [
-            {
+            /*{
                 image: 'data:image/jpeg;base64,'+baseImage,
                 width: 250,
                 alignment: 'center'
-            },
+            },*/
             {
                 text: 'ភូមិក្បាលស្ពាន២ សង្កាត់ប៉ោយប៉ែត ក្រុងប៉ោយប៉ែត',
                 alignment: "center",
